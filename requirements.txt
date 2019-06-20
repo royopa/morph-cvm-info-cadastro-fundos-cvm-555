@@ -1,6 +1,6 @@
 lxml
 cssselect
-requests-html
+pandas
 bizdays
 beautifulsoup4
 scraperwiki
