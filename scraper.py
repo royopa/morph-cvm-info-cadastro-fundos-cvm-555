@@ -39,12 +39,19 @@ def main():
     df['CO_PRD'] = df['CO_PRD'].str.replace('-','')
     df['CO_PRD'] = df['CO_PRD'].str.zfill(14)
 
+    df['DT_REG'] = pd.to_datetime(df['DT_REG'], errors='coerce').dt.strftime('%Y-%m-%d')
+    df['DT_CONST'] = pd.to_datetime(df['DT_CONST'], errors='coerce').dt.strftime('%Y-%m-%d')
+    df['DT_CANCEL'] = pd.to_datetime(df['DT_CANCEL'], errors='coerce').dt.strftime('%Y-%m-%d')
+    df['DT_INI_SIT'] = pd.to_datetime(df['DT_INI_SIT'], errors='coerce').dt.strftime('%Y-%m-%d')
+    df['DT_INI_ATIV'] = pd.to_datetime(df['DT_INI_ATIV'], errors='coerce').dt.strftime('%Y-%m-%d')
+
     print(df.columns.tolist())
 
     for row in df.to_dict('records'):
         scraperwiki.sqlite.save(unique_keys=['CO_PRD'], data=row)
 
     # rename file
+    print('Renomeando arquivo sqlite')
     os.rename('scraperwiki.sqlite', 'data.sqlite')
 
     print('Registros importados com sucesso')
@@ -53,3 +60,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
