@@ -48,7 +48,11 @@ def main():
     print(df.columns.tolist())
 
     for row in df.to_dict('records'):
-        scraperwiki.sqlite.save(unique_keys=['CO_PRD'], data=row)
+        try:
+            scraperwiki.sqlite.save(unique_keys=['CO_PRD'], data=row)
+        except:
+            print('Erro', row)
+            continue
 
     # rename file
     print('Renomeando arquivo sqlite')
