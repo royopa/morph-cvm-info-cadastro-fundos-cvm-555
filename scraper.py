@@ -25,7 +25,7 @@ def main():
     
     url_base = 'http://dados.cvm.gov.br/dados/FI/CAD/DADOS/inf_cadastral_fi_{}.csv'
     url = url_base.format(data_referencia.strftime('%Y%m%d'))
-    print(url)
+    #print(url)
 
     df = pd.read_csv(
         url,
@@ -45,20 +45,20 @@ def main():
     df['DT_INI_SIT'] = pd.to_datetime(df['DT_INI_SIT'], errors='coerce').dt.strftime('%Y-%m-%d')
     df['DT_INI_ATIV'] = pd.to_datetime(df['DT_INI_ATIV'], errors='coerce').dt.strftime('%Y-%m-%d')
 
-    print(df.columns.tolist())
+    #print(df.columns.tolist())
 
     for row in df.to_dict('records'):
         try:
             scraperwiki.sqlite.save(unique_keys=['CO_PRD'], data=row)
-        except:
-            print('Erro', row)
+        except Exception as e:
+            print('Erro', e)
             continue
 
     # rename file
     print('Renomeando arquivo sqlite')
     os.rename('scraperwiki.sqlite', 'data.sqlite')
 
-    print('Registros importados com sucesso')
+    #print('Registros importados com sucesso')
     return True
 
 
