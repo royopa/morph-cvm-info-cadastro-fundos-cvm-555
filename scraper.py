@@ -46,10 +46,11 @@ def main():
     df['DT_INI_ATIV'] = pd.to_datetime(df['DT_INI_ATIV'], errors='coerce').dt.strftime('%Y-%m-%d')
 
     #print(df.columns.tolist())
-
+    df = df.astype(str)
+    
     for row in df.to_dict('records'):
         try:
-            scraperwiki.sqlite.save(unique_keys=['CO_PRD'], data=row)
+            scraperwiki.sqlite.save(unique_keys=df.columns.values.tolist(), data=row)
         except Exception as e:
             print('Erro', e)
             continue
