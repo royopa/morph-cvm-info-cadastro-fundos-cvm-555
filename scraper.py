@@ -4,6 +4,7 @@ import csv
 import os
 import datetime
 import utils
+os.environ['SCRAPERWIKI_DATABASE_NAME'] = 'sqlite:///data.sqlite'
 import scraperwiki
 import pandas as pd
 
