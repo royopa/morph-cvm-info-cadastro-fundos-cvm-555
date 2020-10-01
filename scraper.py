@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import csv
 import os
+import time
 import datetime
 import utils
 os.environ['SCRAPERWIKI_DATABASE_NAME'] = 'sqlite:///data.sqlite'
@@ -57,6 +58,7 @@ def main():
             continue
 
     # rename file
+    time.sleep(60)
     print('Renomeando arquivo sqlite')
     os.rename('scraperwiki.sqlite', 'data.sqlite')
 
